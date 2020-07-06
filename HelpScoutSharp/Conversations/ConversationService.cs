@@ -24,5 +24,12 @@ namespace HelpScoutSharp
                                                      .AppendPathSegment($"{conversationId}/tags")
                                                      .ToUri(), request);
         }
+
+        public async Task UpdateCustomFieldsAsync(long conversationId, UpdateCustomFieldsRequest request)
+        {
+            await _client.PutAsync(new Url(_serviceUri)
+                                                     .AppendPathSegment($"{conversationId}/fields")
+                                                     .ToUri(), request);
+        }
     }
 }

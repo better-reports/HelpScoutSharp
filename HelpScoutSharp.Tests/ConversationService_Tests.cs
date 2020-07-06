@@ -59,5 +59,20 @@ namespace HelpScoutSharp.Tests
                 tags = conv.tags.Select(t => t.tag).Where(t => t != "unit-test").ToArray()
             });
         }
+
+        [TestMethod]
+        public async Task UpdateCustomFieldsAsync_Works()
+        {
+            var conv = (await _service.ListConversationsAsync())._embedded.conversations[0];
+
+            await _service.UpdateCustomFieldsAsync(conv.id, new UpdateCustomFieldsRequest
+            {
+                fields = conv.customFields.Select(f => new UpdateCustomFieldsRequest.CustomFieldValue
+                {
+                    id = f.id,
+                    value = f.value
+                }).ToArray()
+            });
+        }
     }
 }
