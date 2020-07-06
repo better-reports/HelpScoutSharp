@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpScoutSharp", "HelpScoutSharp\HelpScoutSharp.csproj", "{607A2090-D685-4BC6-8A63-9BEF382D9E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpScoutSharp", "HelpScoutSharp\HelpScoutSharp.csproj", "{607A2090-D685-4BC6-8A63-9BEF382D9E70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpScoutSharp.Tests", "HelpScoutSharp.Tests\HelpScoutSharp.Tests.csproj", "{0DB7C59C-D17D-462A-B2A1-D471254EEC8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpScoutSharp.Tests", "HelpScoutSharp.Tests\HelpScoutSharp.Tests.csproj", "{0DB7C59C-D17D-462A-B2A1-D471254EEC8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
