@@ -5,15 +5,11 @@ using System.Threading.Tasks;
 
 namespace HelpScoutSharp
 {
-    public class ConversationService
+    public class ConversationService : ServiceBase
     {
-        private readonly HelpScoutHttpClient _client;
-
-        private readonly Uri URI = new Uri("https://api.helpscout.net/v2/conversations");
-
-        public ConversationService(string accessToken)
+        public ConversationService(string accessToken) 
+            : base(accessToken, "conversations")
         {
-            _client = new HelpScoutHttpClient(accessToken);
         }
 
         public async Task<ListConversationsResponse> ListConversationsAsync(ListConversationsOptions options = null)

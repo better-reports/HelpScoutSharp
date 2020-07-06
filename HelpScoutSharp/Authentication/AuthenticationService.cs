@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace HelpScoutSharp
 {
-    public class AuthenticationService
+    public class AuthenticationService : ServiceBase
     {
-        private readonly HelpScoutHttpClient _client = new HelpScoutHttpClient(null);
+        public AuthenticationService()
+            : base(null, "oauth2/token")
+        {
+        }
 
-        private readonly Uri URI = new Uri("https://api.helpscout.net/v2/oauth2/token");
 
         public string GenerateAuthorizationPromptUrl(string applicationId, string state = null)
         {

@@ -12,7 +12,7 @@ namespace HelpScoutSharp
     public class HelpScoutHttpClient
     {
         public static HttpClient HttpClient = new HttpClient();
-        
+
         private readonly string _accessToken;
 
         public HelpScoutHttpClient(string accessToken)
