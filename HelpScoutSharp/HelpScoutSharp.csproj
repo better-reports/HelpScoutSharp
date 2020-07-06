@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Company>Better Reports</Company>
     <Product>Help Scout API Client for .Net</Product>
     <Authors>Better Reports</Authors>
@@ -10,6 +10,8 @@
     <PackageTags>Help Scout, HelpScout</PackageTags>
     <PackageProjectUrl>https://github.com/better-reports/HelpScoutSharp</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
 </Project>
