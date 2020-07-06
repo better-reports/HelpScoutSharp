@@ -11,6 +11,7 @@ namespace HelpScoutSharp.Tests
     public class ConversationService_Tests
     {
         private ConversationService _service;
+        private MailboxService _mailboxService;
 
         [TestInitialize]
         public async Task Initialize()
@@ -18,6 +19,7 @@ namespace HelpScoutSharp.Tests
             var authSvc = new AuthenticationService();
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
             _service = new ConversationService(token.access_token);
+            _mailboxService = new MailboxService(token.access_token);
         }
 
         [TestMethod]
@@ -49,9 +51,9 @@ namespace HelpScoutSharp.Tests
         {
             var conv = (await _service.ListConversationsAsync())._embedded.conversations[0];
 
-            await _service.UpdateConversationTagsAsync(conv.id, new UpdateTagsRequest 
+            await _service.UpdateConversationTagsAsync(conv.id, new UpdateTagsRequest
             {
-                tags = conv.tags.Select(t => t.tag).Concat(new [] { "unit-test" }).ToArray()
+                tags = conv.tags.Select(t => t.tag).Concat(new[] { "unit-test" }).ToArray()
             });
 
             await _service.UpdateConversationTagsAsync(conv.id, new UpdateTagsRequest
@@ -64,14 +66,30 @@ namespace HelpScoutSharp.Tests
         public async Task UpdateCustomFieldsAsync_Works()
         {
             var conv = (await _service.ListConversationsAsync())._embedded.conversations[0];
+            var mailbox = (await _mailboxService.ListMailboxesAsync())._embedded.mailboxes[0];
+            var customFieldsResponse = await _mailboxService.ListMailboxCustomFieldsAsync(mailbox.id);
 
+            if (customFieldsResponse._embedded.fields.Length == 0)
+            {
+                Assert.Inconclusive();
+                return;
+            }
+
+            var customField = customFieldsResponse._embedded.fields[0];
             await _service.UpdateCustomFieldsAsync(conv.id, new UpdateCustomFieldsRequest
             {
-                fields = conv.customFields.Select(f => new UpdateCustomFieldsRequest.CustomFieldValue
+                fields = new[]
+                {
+                    new UpdateCustomFieldsRequest.CustomFieldValue
+                    {
+                        id = customField.id,
+                        value = $"Unit test - {DateTime.UtcNow.Ticks}"
+                    }
+                }.Concat(conv.customFields.Select(f => new UpdateCustomFieldsRequest.CustomFieldValue
                 {
                     id = f.id,
                     value = f.value
-                }).ToArray()
+                })).ToArray()
             });
         }
     }
