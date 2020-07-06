@@ -7,14 +7,9 @@ namespace HelpScoutSharp
 {
     public class AuthenticationService
     {
-        private readonly HelpScoutHttpClient _client;
+        private readonly HelpScoutHttpClient _client = new HelpScoutHttpClient(null);
 
-        private readonly Uri AUTH_SERVICE_URI = new Uri("https://api.helpscout.net/v2/oauth2/token");
-
-        public AuthenticationService(HelpScoutHttpClient client)
-        {
-            _client = client;
-        }
+        private readonly Uri URI = new Uri("https://api.helpscout.net/v2/oauth2/token");
 
         public string GenerateAuthorizationPromptUrl(string applicationId, string state = null)
         {
@@ -28,7 +23,7 @@ namespace HelpScoutSharp
 
         public async Task<TokenResponse> GetOAuthTokenAsync(string applicationId, string applicationSecret, string code)
         {
-            return await _client.Post<TokenRequest, TokenResponse>(AUTH_SERVICE_URI, new TokenRequest
+            return await _client.PostAsync<TokenRequest, TokenResponse>(URI, new TokenRequest
             {
                 client_id = applicationId,
                 client_secret = applicationSecret,
@@ -39,7 +34,7 @@ namespace HelpScoutSharp
 
         public async Task<TokenResponse> RefreshOAuthTokenAsync(string applicationId, string applicationSecret, string refreshToken)
         {
-            return await _client.Post<TokenRequest, TokenResponse>(AUTH_SERVICE_URI, new TokenRequest
+            return await _client.PostAsync<TokenRequest, TokenResponse>(URI, new TokenRequest
             {
                 client_id = applicationId,
                 client_secret = applicationSecret,
@@ -50,7 +45,7 @@ namespace HelpScoutSharp
 
         public async Task<TokenResponse> GetApplicationTokenAsync(string applicationId, string applicationSecret)
         {
-            return await _client.Post<TokenRequest, TokenResponse>(AUTH_SERVICE_URI, new TokenRequest
+            return await _client.PostAsync<TokenRequest, TokenResponse>(URI, new TokenRequest
             {
                 client_id = applicationId,
                 client_secret = applicationSecret,
