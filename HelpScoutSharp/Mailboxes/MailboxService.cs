@@ -1,4 +1,5 @@
 ﻿
+using Flurl;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,14 @@ namespace HelpScoutSharp
 
         public async Task<ListMailboxesResponse> ListMailboxesAsync()
         {
-            return await _client.GetAsync<ListMailboxesResponse>(URI);
+            return await _client.GetAsync<ListMailboxesResponse>(_serviceUri);
+        }
+
+        public async Task<ListMailboxCustomFieldsResponse> ListMailboxCustomFieldsAsync(long mailboxId)
+        {
+            return await _client.GetAsync<ListMailboxCustomFieldsResponse>(new Url(_serviceUri)
+                                                                                .AppendPathSegment($"{mailboxId}/fields")
+                                                                                .ToUri());
         }
     }
 }

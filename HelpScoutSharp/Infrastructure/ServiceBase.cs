@@ -8,12 +8,12 @@ namespace HelpScoutSharp
     {
         protected readonly HelpScoutHttpClient _client;
 
-        protected readonly Uri URI;
+        protected readonly Uri _serviceUri;
 
         public ServiceBase(string accessToken, string endpointPath)
         {
             _client = new HelpScoutHttpClient(accessToken);
-            URI = new Uri($"https://api.helpscout.net/v2/{endpointPath}");
+            _serviceUri = new Uri($"https://api.helpscout.net/v2/{endpointPath}");
         }
     }
 }

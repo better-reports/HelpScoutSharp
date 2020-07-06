@@ -26,5 +26,14 @@ namespace HelpScoutSharp.Tests
             Assert.IsTrue(res.page.size > 0);
             Assert.IsNotNull(res._embedded.mailboxes[0].email);
         }
+
+        [TestMethod]
+        public async Task ListMailboxCustomFieldsAsync_Works()
+        {
+            var maiboxId = (await _service.ListMailboxesAsync())._embedded.mailboxes[0].id;
+            var res = await _service.ListMailboxCustomFieldsAsync(maiboxId);
+            Assert.IsTrue(res.page.size > 0);
+            Assert.IsNotNull(res._embedded.fields);
+        }
     }
 }

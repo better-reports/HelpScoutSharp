@@ -15,7 +15,7 @@ namespace HelpScoutSharp
 
         public async Task<ListWebhooksResponse> ListWebhooksAsync()
         {
-            return await _client.GetAsync<ListWebhooksResponse>(URI);
+            return await _client.GetAsync<ListWebhooksResponse>(_serviceUri);
         }
     }
 }

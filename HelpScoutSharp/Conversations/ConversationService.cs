@@ -14,7 +14,7 @@ namespace HelpScoutSharp
 
         public async Task<ListConversationsResponse> ListConversationsAsync(ListConversationsOptions options = null)
         {
-            return await _client.GetAsync<ListConversationsOptions, ListConversationsResponse>(URI, options);
+            return await _client.GetAsync<ListConversationsOptions, ListConversationsResponse>(_serviceUri, options);
         }
     }
 }
