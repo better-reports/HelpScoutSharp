@@ -26,5 +26,12 @@ namespace HelpScoutSharp
                                                                                 .AppendPathSegment($"{mailboxId}/fields")
                                                                                 .ToUri());
         }
+
+        public async Task<ListMailboxFoldersResponse> ListMailboxFoldersAsync(long mailboxId)
+        {
+            return await _client.GetAsync<ListMailboxFoldersResponse>(new Url(_serviceUri)
+                                                                                .AppendPathSegment($"{mailboxId}/folders")
+                                                                                .ToUri());
+        }
     }
 }
