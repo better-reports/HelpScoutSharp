@@ -25,7 +25,7 @@ namespace HelpScoutSharp
 
         public async Task<TokenResponse> GetOAuthTokenAsync(string applicationId, string applicationSecret, string code)
         {
-            return await _client.PostAsync<TokenRequest, TokenResponse>(_serviceUri, new TokenRequest
+            return await _client.PostAsync<TokenResponse>(_serviceUri, new TokenRequest
             {
                 client_id = applicationId,
                 client_secret = applicationSecret,
@@ -36,7 +36,7 @@ namespace HelpScoutSharp
 
         public async Task<TokenResponse> RefreshOAuthTokenAsync(string applicationId, string applicationSecret, string refreshToken)
         {
-            return await _client.PostAsync<TokenRequest, TokenResponse>(_serviceUri, new TokenRequest
+            return await _client.PostAsync<TokenResponse>(_serviceUri, new TokenRequest
             {
                 client_id = applicationId,
                 client_secret = applicationSecret,
@@ -47,7 +47,7 @@ namespace HelpScoutSharp
 
         public async Task<TokenResponse> GetApplicationTokenAsync(string applicationId, string applicationSecret)
         {
-            return await _client.PostAsync<TokenRequest, TokenResponse>(_serviceUri, new TokenRequest
+            return await _client.PostAsync<TokenResponse>(_serviceUri, new TokenRequest
             {
                 client_id = applicationId,
                 client_secret = applicationSecret,

@@ -2,6 +2,7 @@ using HelpScoutSharp;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HelpScoutSharp.Tests
@@ -41,6 +42,22 @@ namespace HelpScoutSharp.Tests
             Assert.IsTrue(res._embedded.conversations[0].state.Length > 0);
             Assert.IsTrue(res._embedded.conversations[0]._embedded.threads.Length > 0);
             Assert.IsTrue(res._embedded.conversations[0]._embedded.threads[0].source.type.Length > 0);
+        }
+
+        [TestMethod]
+        public async Task UpdateConversationTagsAsync_Works()
+        {
+            var conv = (await _service.ListConversationsAsync())._embedded.conversations[0];
+
+            await _service.UpdateConversationTagsAsync(conv.id, new UpdateTagsRequest 
+            {
+                tags = conv.tags.Select(t => t.tag).Concat(new [] { "unit-test" }).ToArray()
+            });
+
+            await _service.UpdateConversationTagsAsync(conv.id, new UpdateTagsRequest
+            {
+                tags = conv.tags.Select(t => t.tag).Where(t => t != "unit-test").ToArray()
+            });
         }
     }
 }

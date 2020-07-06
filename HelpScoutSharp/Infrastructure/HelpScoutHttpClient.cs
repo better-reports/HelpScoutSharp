@@ -32,16 +32,31 @@ namespace HelpScoutSharp
             return await this.SendAsync<TResponse>(request);
         }
 
-        public async Task<TResponse> PostAsync<TBody, TResponse>(Uri uri, TBody r)
+        public async Task<TResponse> PostAsync<TResponse>(Uri uri, object content)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, uri)
-            { 
-                Content = new StringContent(JsonSerializer.Serialize(r), Encoding.UTF8, "application/json")
+            {
+                Content = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json")
             };
             return await this.SendAsync<TResponse>(request);
         }
 
+        public async Task PutAsync(Uri uri, object content)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Put, uri)
+            {
+                Content = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json")
+            };
+            await this.SendAsync(request);
+        }
+
         private async Task<TResponse> SendAsync<TResponse>(HttpRequestMessage request)
+        {
+            var response = await this.SendAsync(request);
+            return JsonSerializer.Deserialize<TResponse>(await response.Content.ReadAsStringAsync());
+        }
+
+        private async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
         {
             using (request)
             {
@@ -53,7 +68,7 @@ namespace HelpScoutSharp
                 if (!response.IsSuccessStatusCode)
                     throw new HelpScoutException(response);
 
-                return JsonSerializer.Deserialize<TResponse>(await response.Content.ReadAsStringAsync());
+                return response;
             }
         }
     }
