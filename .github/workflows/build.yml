@@ -27,5 +27,5 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Publish to nuget
       env:
-        MY_ENV_VAR: ${{ secrets.NUGET_API_KEY }}
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       run: dotnet nuget push HelpScoutSharp\bin\Release\*.nupkg  -s https://api.nuget.org/v3/index.json --skip-duplicate -k $NUGET_API_KEY
