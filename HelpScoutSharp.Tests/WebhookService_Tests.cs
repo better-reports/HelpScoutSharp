@@ -10,6 +10,20 @@ namespace HelpScoutSharp.Tests
     public class WebhookService_Tests
     {
         private WebhookService _service;
+        private string[] ALL_EVENTS = @"
+convo.agent.reply.created
+convo.assigned
+convo.created
+convo.customer.reply.created
+convo.deleted
+convo.merged
+convo.moved
+convo.note.created
+convo.status
+convo.tags
+customer.created
+customer.updated
+satisfaction.ratings".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
 
         [TestInitialize]
         public async Task Initialize()
@@ -24,6 +38,29 @@ namespace HelpScoutSharp.Tests
         {
             var res = await _service.ListWebhooksAsync();
             Assert.IsTrue(res.page.size > 0);
+        }
+
+        [TestMethod]
+        public async Task MutateWebhook_Works()
+        {
+            var webhookId = await _service.CreateWebhookAsync(new CreateWebhookRequest
+            {
+                url = "https://www.example.com",
+                secret = "mySecret",
+                notification = true,
+                events = ALL_EVENTS
+            });
+            Assert.IsTrue(webhookId > 0);
+
+            await _service.UpdateWebhookAsync(webhookId, new UpdateWebhookRequest
+            {
+                url = "https://www.google.com",
+                secret = "mySecretNew",
+                notification = false,
+                events = ALL_EVENTS
+            });
+
+            await _service.DeleteWebhookAsync(webhookId);
         }
     }
 }

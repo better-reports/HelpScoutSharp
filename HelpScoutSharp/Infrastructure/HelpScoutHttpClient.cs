@@ -41,13 +41,28 @@ namespace HelpScoutSharp
             return await this.SendAsync<TResponse>(request);
         }
 
-        public async Task PutAsync(Uri uri, object content)
+        public async Task<HttpResponseMessage> PostAsync(Uri uri, object content)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, uri)
+            {
+                Content = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json")
+            };
+            return await this.SendAsync(request);
+        }
+
+        public async Task<HttpResponseMessage> PutAsync(Uri uri, object content)
         {
             var request = new HttpRequestMessage(HttpMethod.Put, uri)
             {
                 Content = new StringContent(JsonSerializer.Serialize(content), Encoding.UTF8, "application/json")
             };
-            await this.SendAsync(request);
+            return await this.SendAsync(request);
+        }
+
+        public async Task<HttpResponseMessage> DeleteAsync(Uri uri)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, uri);
+            return await this.SendAsync(request);
         }
 
         private async Task<TResponse> SendAsync<TResponse>(HttpRequestMessage request)
