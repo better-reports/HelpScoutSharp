@@ -22,6 +22,43 @@ namespace HelpScoutSharp
             public string via { get; set; }
         }
 
+        public class AssignedTo
+        {
+            public long id { get; set; }
+
+            public string first { get; set; }
+
+            public string last { get; set; }
+
+            public string email { get; set; }
+        }
+
+        public class CreatedBy
+        {
+            public long id { get; set; }
+
+            public string type { get; set; }
+
+            public string first { get; set; }
+
+            public string last { get; set; }
+
+            public string email { get; set; }
+        }
+
+        public class ThreadCustomer
+        {
+            public long id { get; set; }
+
+            public string photoUrl { get; set; }
+
+            public string first { get; set; }
+
+            public string last { get; set; }
+
+            public string email { get; set; }
+        }
+
         public class Embedded
         {
             public class Attachment
@@ -44,7 +81,7 @@ namespace HelpScoutSharp
 
         public long id { get; set; }
 
-        public User assignedTo { get; set; }
+        public AssignedTo assignedTo { get; set; }
 
         public string status { get; set; }
 
@@ -56,9 +93,9 @@ namespace HelpScoutSharp
 
         public Source source { get; set; }
 
-        public Customer customer { get; set; }
+        public ThreadCustomer customer { get; set; }
 
-        public User createdBy { get; set; }
+        public CreatedBy createdBy { get; set; }
 
         public long savedReplyId { get; set; }
 

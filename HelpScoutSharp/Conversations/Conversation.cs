@@ -6,6 +6,58 @@ namespace HelpScoutSharp
 {
     public class Conversation
     {
+        public class Assignee
+        {
+            public long id { get; set;}
+
+            public string type { get; set; }
+
+            public string first { get; set; }
+
+            public string last { get; set; }
+
+            public string email { get; set; }
+        }
+
+        public class CreatedBy
+        {
+            public long id { get; set; }
+
+            public string type { get; set; }
+
+            public string email { get; set; }
+        }
+
+        public class ClosedByUser
+        {
+            public long id { get; set; }
+
+            public string type { get; set; }
+
+            public string first { get; set; }
+
+            public string last { get; set; }
+
+            public string photoUrl { get; set; }
+
+            public string email { get; set; }
+        }
+
+        public class PrimaryCustomer
+        {
+            public long id { get; set; }
+
+            public string type { get; set; }
+
+            public string first { get; set; }
+
+            public string last { get; set; }
+
+            public string photoUrl { get; set; }
+
+            public string email { get; set; }
+        }
+
         public class CustomerWaitingSince
         {
             public DateTime time { get; set; }
@@ -67,15 +119,15 @@ namespace HelpScoutSharp
 
         public long mailboxId { get; set; }
 
-        public User assignee { get; set; }
+        public Assignee assignee { get; set; }
 
-        public User createdBy { get; set; }
+        public CreatedBy createdBy { get; set; }
         
         public DateTime createdAt { get; set; }
 
         public long closedBy { get; set; }
 
-        public User closedByUser { get; set; }
+        public ClosedByUser closedByUser { get; set; }
 
         public DateTime closedAt { get; set; }
 
@@ -91,7 +143,7 @@ namespace HelpScoutSharp
 
         public string[] bcc { get; set; }
 
-        public Customer primaryCustomer { get; set; }
+        public PrimaryCustomer primaryCustomer { get; set; }
 
         public CustomField[] customFields { get; set; }
 

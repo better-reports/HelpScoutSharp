@@ -23,7 +23,24 @@ namespace HelpScoutSharp.Tests
         public async Task ListConversationsAsync_Works()
         {
             var res = await _service.ListConversationsAsync();
+            Assert.IsTrue(res.page.size > 0);
             Assert.IsTrue(res._embedded.conversations.Length > 0);
+            Assert.IsTrue(res._embedded.conversations[0].state.Length > 0);
+        }
+
+        [TestMethod]
+        public async Task ListConversationsAsync_EmbedThreads()
+        {
+            var res = await _service.ListConversationsAsync(new ListConversationsOptions
+            {
+                embed = "threads",
+                status = "all"
+            });
+            Assert.IsTrue(res.page.size > 0);
+            Assert.IsTrue(res._embedded.conversations.Length > 0);
+            Assert.IsTrue(res._embedded.conversations[0].state.Length > 0);
+            Assert.IsTrue(res._embedded.conversations[0]._embedded.threads.Length > 0);
+            Assert.IsTrue(res._embedded.conversations[0]._embedded.threads[0].source.type.Length > 0);
         }
     }
 }
