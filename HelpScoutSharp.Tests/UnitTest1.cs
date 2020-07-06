@@ -9,7 +9,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
-            Console.WriteLine($"Env var = {Environment.GetEnvironmentVariable("MY_ENV_VAR")}");
+            Assert.IsNotNull(Environment.GetEnvironmentVariable("MY_ENV_VAR"));
+            Assert.IsTrue(Environment.GetEnvironmentVariable("MY_ENV_VAR").Length > 0);
         }
     }
 }
