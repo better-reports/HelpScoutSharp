@@ -23,7 +23,8 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       env:
-        MY_ENV_VAR: ${{ secrets.MY_ENV_VAR }}
+        HELP_SCOUT_SHARP_APP_ID: ${{ secrets.HELP_SCOUT_SHARP_APP_ID }}
+        HELP_SCOUT_SHARP_APP_SECRET: ${{ secrets.HELP_SCOUT_SHARP_APP_SECRET }}
       run: dotnet test --no-restore --verbosity normal
     - name: Publish to nuget
       env:
