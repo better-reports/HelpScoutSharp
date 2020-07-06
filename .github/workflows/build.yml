@@ -22,4 +22,6 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
+      env:
+        MY_ENV_VAR: ${{ secrets.MY_ENV_VAR }}
       run: dotnet test --no-restore --verbosity normal

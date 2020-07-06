@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace UnitTestProject1
 {
@@ -8,6 +9,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
+            Console.WriteLine($"Env var = {Environment.GetEnvironmentVariable("MY_ENV_VAR")}");
         }
     }
 }
