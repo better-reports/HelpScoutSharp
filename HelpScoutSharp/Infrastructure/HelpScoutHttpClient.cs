@@ -81,7 +81,7 @@ namespace HelpScoutSharp
                 var response = await HttpClient.SendAsync(request);
 
                 if (!response.IsSuccessStatusCode)
-                    throw new HelpScoutException(response);
+                    throw new HelpScoutException(response, await response.Content.ReadAsStringAsync());
 
                 return response;
             }

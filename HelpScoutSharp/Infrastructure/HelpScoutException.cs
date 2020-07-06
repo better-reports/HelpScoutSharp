@@ -9,9 +9,15 @@ namespace HelpScoutSharp
     {
         public HttpResponseMessage Response { get; }
 
-        public HelpScoutException(HttpResponseMessage response)
+        public string ResponseContent { get; }
+
+        public HelpScoutException(HttpResponseMessage response, string responseContent)
+            : base($@"Help Scout API call failed with code: {response.StatusCode}
+Reason: {response.ReasonPhrase}
+Content: {responseContent}")
         {
             this.Response = response;
+            this.ResponseContent = responseContent;
         }
     }
 }
