@@ -19,7 +19,7 @@ PRs are welcome!
 | Conversations / Attachments  | *                                 | No           |
 | Conversation / Custom fields | *                                 | Yes          |
 | Conversation / Tags          | *                                 | Yes          |
-| Conversation / Threads       | Create/Get/Update                 | No           |
+| Conversation / Threads       | Create/Update/GetThreadOriginal   | No           |
 | Conversation / Threads       | List                              | Yes          |
 | Conversation                 | Create/Update/Delete              | No           |
 | Conversation                 | List/Get                          | Yes          |
@@ -30,7 +30,7 @@ PRs are welcome!
 | Ratings                      | Get                               | Yes          |
 | Reports                      | *                                 | No           |
 | Tags                         | List Tags                         | Yes          |
-| Teams                        | *                                 | No           |
+| Teams                        | *                                 | Yes          |
 | Users                        | List/Get/GetMe                    | Yes          |
 | Users                        | Delete                            | No           |
 | Webhooks                     | *                                 | Yes          |
