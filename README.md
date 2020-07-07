@@ -27,7 +27,7 @@ PRs are welcome!
 | Customers                    | List                              | Yes          |
 | Mailbox                      | Get                               | No           |
 | Mailbox                      | List/ListFolders/ListCustomFields | Yes          |
-| Ratings                      | Get                               | No           |
+| Ratings                      | Get                               | Yes          |
 | Reports                      | *                                 | No           |
 | Tags                         | List Tags                         | No           |
 | Teams                        | *                                 | No           |
