@@ -23,6 +23,15 @@ namespace HelpScoutSharp.Tests
         }
 
         [TestMethod]
+        public async Task GetConversationsAsync_Works()
+        {
+            var res = await _service.ListConversationsAsync();
+            var conv = await _service.GetConversationAsync(res._embedded.conversations[0].id, new GetConversationsOptions { embed = "threads" });
+            Assert.IsTrue(conv.id > 0);
+            Assert.IsTrue(conv._embedded.threads[0].id > 0);
+        }
+
+        [TestMethod]
         public async Task ListConversationsAsync_Works()
         {
             var res = await _service.ListConversationsAsync();
@@ -78,6 +87,10 @@ namespace HelpScoutSharp.Tests
             var customField = customFieldsResponse._embedded.fields[0];
             await _service.UpdateCustomFieldsAsync(conv.id, new UpdateCustomFieldsRequest
             {
+                fields = new UpdateCustomFieldsRequest.CustomFieldValue[0]
+            });
+            await _service.UpdateCustomFieldsAsync(conv.id, new UpdateCustomFieldsRequest
+            {
                 fields = new[]
                 {
                     new UpdateCustomFieldsRequest.CustomFieldValue
@@ -85,11 +98,7 @@ namespace HelpScoutSharp.Tests
                         id = customField.id,
                         value = $"Unit test - {DateTime.UtcNow.Ticks}"
                     }
-                }.Concat(conv.customFields.Select(f => new UpdateCustomFieldsRequest.CustomFieldValue
-                {
-                    id = f.id,
-                    value = f.value
-                })).ToArray()
+                }
             });
         }
     }

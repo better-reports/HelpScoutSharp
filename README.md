@@ -21,8 +21,8 @@ PRs are welcome!
 | Conversation / Tags          | *                                 | Yes          |
 | Conversation / Threads       | Create/Get/Update                 | No           |
 | Conversation / Threads       | List                              | Yes          |
-| Conversation                 | Create/Get/Update/Delete          | No           |
-| Conversation                 | List                              | Yes          |
+| Conversation                 | Create/Update/Delete              | No           |
+| Conversation                 | List/Get                          | Yes          |
 | Customers                    | Create/Get/Update/Overwrite       | No           |
 | Customers                    | List                              | Yes          |
 | Mailbox                      | Get                               | No           |

@@ -20,15 +20,9 @@ namespace HelpScoutSharp
             _accessToken = accessToken;
         }
 
-        public async Task<TResponse> GetAsync<TResponse>(Uri uri)
+        public async Task<TResponse> GetAsync<TResponse>(Uri uri, object queryParams = null)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            return await this.SendAsync<TResponse>(request);
-        }
-
-        public async Task<TResponse> GetAsync<TQueryString, TResponse>(Uri uri, TQueryString r = null) where TQueryString : class
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, new Url(uri).SetQueryParams(r).ToString());
+            var request = new HttpRequestMessage(HttpMethod.Get, new Url(uri).SetQueryParams(queryParams).ToString());
             return await this.SendAsync<TResponse>(request);
         }
 
