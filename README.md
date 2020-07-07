@@ -6,7 +6,7 @@ https://developer.helpscout.com/mailbox-api/
 
 ![Build](https://github.com/better-reports/HelpScoutSharp/workflows/Build/badge.svg)
 
-
+`Install-Package HelpScoutSharp`
 
 ### Implemented operations
 
@@ -14,7 +14,7 @@ Not all endpoints are fully implemented yet.
 
 PRs are welcome!
 
-| Endpoint                     | Method                            | Implemented? |
+| Endpoint                     | Operation                         | Implemented? |
 | ---------------------------- | --------------------------------- | ------------ |
 | Conversations / Attachments  | *                                 | No           |
 | Conversation / Custom fields | *                                 | Yes          |
