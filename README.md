@@ -29,7 +29,7 @@ PRs are welcome!
 | Mailbox                      | List/ListFolders/ListCustomFields | Yes          |
 | Ratings                      | Get                               | Yes          |
 | Reports                      | *                                 | No           |
-| Tags                         | List Tags                         | No           |
+| Tags                         | List Tags                         | Yes          |
 | Teams                        | *                                 | No           |
 | Users                        | List/Get/GetMe                    | Yes          |
 | Users                        | Delete                            | No           |
