@@ -31,8 +31,8 @@ PRs are welcome!
 | Reports                      | *                                 | No           |
 | Tags                         | List Tags                         | No           |
 | Teams                        | *                                 | No           |
-| Users                        | Delete/Get/GetCurrent             | No           |
-| Users                        | List                              | Yes          |
+| Users                        | List/Get/GetMe                    | Yes          |
+| Users                        | Delete                            | No           |
 | Webhooks                     | *                                 | Yes          |
 | Workflows                    | *                                 | No           |
 

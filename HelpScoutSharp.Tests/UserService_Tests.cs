@@ -9,14 +9,14 @@ namespace HelpScoutSharp.Tests
     [TestClass]
     public class UserService_Tests
     {
-        private USerService _service;
+        private UserService _service;
 
         [TestInitialize]
         public async Task Initialize()
         {
             var authSvc = new AuthenticationService();
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
-            _service = new USerService(token.access_token);
+            _service = new UserService(token.access_token);
         }
 
         [TestMethod]
@@ -30,6 +30,14 @@ namespace HelpScoutSharp.Tests
         public async Task GetMeAsync_Works()
         {
             var user = await _service.GetMeAsync();
+            Assert.IsTrue(user.id > 0);
+        }
+
+        [TestMethod]
+        public async Task GetUserAsync_Works()
+        {
+            var res = await _service.ListUsersAsync();
+            var user = await _service.GetUserAsync(res._embedded.users[0].id);
             Assert.IsTrue(user.id > 0);
         }
     }
