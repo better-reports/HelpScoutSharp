@@ -69,3 +69,15 @@ var token = await _service.GetApplicationTokenAsync(appId, appSecret);
 var customerService = new CustomerService(token.access_token);
 var res = await customerService.ListCustomersAsync();
 ```
+
+### Verifying webhooks
+
+When receiving webhooks, you can check that the request is authentic with the `WebhookService`.
+
+```
+var service = new WebhookService();
+string secretKey = "GET FROM CONFIG";
+string signature = "GET FROM HTTP header 'X-Helpscout-Signature'";
+string body = "GET RAW BODY FROM REQUEST"
+bool isAuthentic = service.IsAuthenticWebhook(secretKey, signature, body);
+```
