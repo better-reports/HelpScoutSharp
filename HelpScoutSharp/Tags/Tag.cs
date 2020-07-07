@@ -16,6 +16,8 @@ namespace HelpScoutSharp
 
         public DateTime createdAt { get; set; }
 
+        public DateTime updatedAt { get; set; }
+
         public int ticketCount { get; set; }
     }
 }

@@ -129,7 +129,7 @@ namespace HelpScoutSharp
 
         public ClosedByUser closedByUser { get; set; }
 
-        public DateTime closedAt { get; set; }
+        public DateTime? closedAt { get; set; }
 
         public DateTime userUpdatedAt { get; set; }
 

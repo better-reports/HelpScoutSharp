@@ -69,9 +69,9 @@ namespace HelpScoutSharp
 
                 public string mimeType { get; set; }
 
-                public long width { get; set; }
+                public long? width { get; set; }
 
-                public long height { get; set; }
+                public long? height { get; set; }
 
                 public long size { get; set; }
             }
@@ -109,7 +109,7 @@ namespace HelpScoutSharp
 
         public DateTime createdAt { get; set; }
 
-        public DateTime openedAt { get; set; }
+        public DateTime? openedAt { get; set; }
 
         public Embedded _embedded { get; set; }
     }
