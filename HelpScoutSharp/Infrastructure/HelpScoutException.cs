@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 
@@ -10,6 +11,16 @@ namespace HelpScoutSharp
         public HttpResponseMessage Response { get; }
 
         public string ResponseContent { get; }
+
+        public bool IsUnauthorized => (int)Response.StatusCode == 401;
+
+        public bool IsForbidden => (int)Response.StatusCode == 403;
+
+        public bool IsRateLimit => (int)Response.StatusCode == 429;
+
+        public TimeSpan? RateLimitRetryAfter => Response.Headers.Contains("X-RateLimit-Retry-After") ?
+                                                    TimeSpan.FromSeconds(int.Parse(Response.Headers.GetValues("X-RateLimit-Retry-After").First())) :
+                                                    (TimeSpan?)null;
 
         public HelpScoutException(HttpResponseMessage response, string responseContent)
             : base($@"Help Scout API call failed with code: {response.StatusCode}
