@@ -22,7 +22,7 @@ namespace HelpScoutSharp.Tests
         {
             var token = await _service.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
             Assert.IsNotNull(token.access_token);
-            Assert.IsTrue(token.expires_in > 0);
+            Assert.IsTrue(token.expires_in > TimeSpan.Zero);
             Assert.IsNull(token.refresh_token);
         }
 
@@ -32,7 +32,7 @@ namespace HelpScoutSharp.Tests
         {
             var token = await _service.GetOAuthTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret, "ENTER_CODE_HERE");
             Assert.IsNotNull(token.access_token);
-            Assert.IsTrue(token.expires_in > 0);
+            Assert.IsTrue(token.expires_in > TimeSpan.Zero);
             Assert.IsNotNull(token.refresh_token);
         }
 
@@ -43,7 +43,7 @@ namespace HelpScoutSharp.Tests
         {
             var token = await _service.RefreshOAuthTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret, "ENTER_REFRESH_TOKEN_HERE");
             Assert.IsNotNull(token.access_token);
-            Assert.IsTrue(token.expires_in > 0);
+            Assert.IsTrue(token.expires_in > TimeSpan.Zero);
             Assert.IsNotNull(token.refresh_token);
         }
     }

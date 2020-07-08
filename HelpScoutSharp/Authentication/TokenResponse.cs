@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace HelpScoutSharp
 {
@@ -18,6 +19,7 @@ namespace HelpScoutSharp
         /// <summary>
         /// duration in seconds
         /// </summary>
-        public int expires_in { get; set; }
+        [JsonConverter(typeof(NumberTimespanConverter))]
+        public TimeSpan expires_in { get; set; }
     }
 }
