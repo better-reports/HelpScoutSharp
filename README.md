@@ -56,7 +56,7 @@ var token = await _service.GetOAuthTokenAsync(appId, appSecret, "ENTER_CODE_HERE
 ...
 // Use the accessToken to instantiate any service
 var customerService = new CustomerService(token.access_token);
-var res = await customerService.ListCustomersAsync();
+var res = await customerService.ListAsync();
 ```
 ###### Internal authentication
 
@@ -67,7 +67,7 @@ var token = await _service.GetApplicationTokenAsync(appId, appSecret);
 ...
 // Use the accessToken to instantiate any service
 var customerService = new CustomerService(token.access_token);
-var res = await customerService.ListCustomersAsync();
+var res = await customerService.ListAsync();
 ```
 
 ### Global settings
