@@ -4,10 +4,8 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class ListUsersOptions
+    public class ListUsersOptions : ListOptions
     {
-        public int? page { get; set; }
-
         public string email { get; set; }
 
         public long? mailbox { get; set; }

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class ListTeamsOptions : ListOptions
+    public class ListOptions
     {
+        public int? page { get; set; }
     }
 }

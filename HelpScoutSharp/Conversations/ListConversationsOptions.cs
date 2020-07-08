@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class ListConversationsOptions
+    public class ListConversationsOptions : ListOptions
     {
         public string embed { get; set; }
 
@@ -27,8 +27,6 @@ namespace HelpScoutSharp
         public string sortOrder { get; set; }
 
         public string query { get; set; }
-
-        public int? page { get; set; }
 
         public string customFieldsByIds { get; set; }
     }
