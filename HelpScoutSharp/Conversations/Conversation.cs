@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class Conversation
+    public class Conversation : IHasId
     {
         public class Assignee
         {

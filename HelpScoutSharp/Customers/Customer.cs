@@ -4,39 +4,39 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class Customer
+    public class Customer : IHasId
     {
         public class Embedded
         {
-            public class CustomerEmail
+            public class CustomerEmail : IHasId
             {
                 public long id { get; set; }
                 public string type { get; set; }
                 public string value { get; set; }
             }
 
-            public class CustomerPhone
+            public class CustomerPhone : IHasId
             {
                 public long id { get; set; }
                 public string type { get; set; }
                 public string value { get; set; }
             }
 
-            public class CustomerChat
+            public class CustomerChat : IHasId
             {
                 public long id { get; set; }
                 public string type { get; set; }
                 public string value { get; set; }
             }
 
-            public class CustomerSocialProfile
+            public class CustomerSocialProfile : IHasId
             {
                 public long id { get; set; }
                 public string type { get; set; }
                 public string value { get; set; }
             }
 
-            public class CustomerWebsite
+            public class CustomerWebsite : IHasId
             {
                 public long id { get; set; }
                 public string value { get; set; }

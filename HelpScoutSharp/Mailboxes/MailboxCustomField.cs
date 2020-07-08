@@ -4,9 +4,9 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class MailboxCustomField
+    public class MailboxCustomField : IHasId
     {
-        public class DropDownOption
+        public class DropDownOption : IHasId
         {
             public long id { get; set; }
 

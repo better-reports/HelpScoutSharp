@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class Tag
+    public class Tag : IHasId
     {
         public long id { get; set; }
 

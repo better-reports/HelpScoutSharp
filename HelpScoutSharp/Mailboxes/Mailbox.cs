@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class Mailbox
+    public class Mailbox : IHasId
     {
         public long id { get; set; }
 

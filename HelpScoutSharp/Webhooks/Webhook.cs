@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class Webhook
+    public class Webhook : IHasId
     {
         public long id { get; set; }
 

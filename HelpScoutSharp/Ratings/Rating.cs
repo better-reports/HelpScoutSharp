@@ -4,9 +4,9 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class Rating
+    public class Rating : IHasId
     {
-        public class RatingCustomer
+        public class RatingCustomer : IHasId
         {
             public long id { get; set; }
 
@@ -19,7 +19,7 @@ namespace HelpScoutSharp
             public string photoUrl { get; set; }
         }
 
-        public class RatingUser
+        public class RatingUser : IHasId
         {
             public long id { get; set; }
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class Thread
+    public class Thread : IHasId
     {
         public class Action
         {
