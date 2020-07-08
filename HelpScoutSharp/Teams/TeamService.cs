@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace HelpScoutSharp
 {
-    public class TeamService : ServiceBase
+    public class TeamService : ServiceBase, IListableService<Team, ListTeamsOptions>
     {
         public TeamService(string accessToken)
             : base(accessToken, "teams")
         {
         }
 
-        public async Task<ListTeamsResponse> ListAsync(ListTeamsOptions options = null)
+        public async Task<IPage<Team>> ListAsync(ListTeamsOptions options = null)
         {
-            return await _client.GetAsync<ListTeamsResponse>(_serviceUri, options);
+            return await _client.GetAsync<TeamPage>(_serviceUri, options);
         }
 
-        public async Task<ListTeamMembersResponse> LisMembersAsync(long teamId, ListTeamMembersOptions options = null)
+        public async Task<MemberPage> LisMembersAsync(long teamId, ListTeamMembersOptions options = null)
         {
-            return await _client.GetAsync<ListTeamMembersResponse>(new Url(_serviceUri)
+            return await _client.GetAsync<MemberPage>(new Url(_serviceUri)
                                                                         .AppendPathSegment($"{teamId}/members")
                                                                         .ToUri(), options);
         }

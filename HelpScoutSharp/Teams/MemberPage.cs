@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class ListUsersResponse
+    public class MemberPage : IPage<User>
     {
         public class Embedded
         {
@@ -14,5 +14,7 @@ namespace HelpScoutSharp
         public Embedded _embedded { get; set; }
 
         public Page page { get; set; }
+
+        public User[] entities => _embedded.users;
     }
 }

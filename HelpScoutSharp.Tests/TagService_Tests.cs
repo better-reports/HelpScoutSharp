@@ -14,6 +14,7 @@ namespace HelpScoutSharp.Tests
         [TestInitialize]
         public async Task Initialize()
         {
+            HelpScoutHttpClient.RateLimitBreachBehavior = RateLimitBreachBehavior.WaitAndRetryOnce;
             var authSvc = new AuthenticationService();
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
             _service = new TagService(token.access_token);

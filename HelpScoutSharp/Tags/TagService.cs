@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace HelpScoutSharp
 {
-    public class TagService : ServiceBase
+    public class TagService : ServiceBase, IListableService<Tag, ListTagsOptions>
     {
         public TagService(string accessToken)
             : base(accessToken, "tags")
         {
         }
 
-        public async Task<ListTagsResponse> ListAsync(ListTagsOptions options = null)
+        public async Task<IPage<Tag>> ListAsync(ListTagsOptions options = null)
         {
-            return await _client.GetAsync<ListTagsResponse>(_serviceUri, options);
+            return await _client.GetAsync<TagPage>(_serviceUri, options);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace HelpScoutSharp.Tests
         [TestInitialize]
         public async Task Initialize()
         {
+            HelpScoutHttpClient.RateLimitBreachBehavior = RateLimitBreachBehavior.WaitAndRetryOnce;
             var authSvc = new AuthenticationService();
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
             _service = new ConversationService(token.access_token);
@@ -26,7 +27,7 @@ namespace HelpScoutSharp.Tests
         public async Task GetConversationsAsync_Works()
         {
             var res = await _service.ListAsync();
-            var conv = await _service.GetAsync(res._embedded.conversations[0].id, new GetConversationsOptions { embed = "threads" });
+            var conv = await _service.GetAsync(res.entities[0].id, new GetConversationsOptions { embed = "threads" });
             Assert.IsTrue(conv.id > 0);
             Assert.IsTrue(conv._embedded.threads[0].id > 0);
         }
@@ -36,8 +37,8 @@ namespace HelpScoutSharp.Tests
         {
             var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
-            Assert.IsTrue(res._embedded.conversations.Length > 0);
-            Assert.IsTrue(res._embedded.conversations[0].state.Length > 0);
+            Assert.IsTrue(res.entities.Length > 0);
+            Assert.IsTrue(res.entities[0].state.Length > 0);
         }
 
         [TestMethod]
@@ -49,16 +50,16 @@ namespace HelpScoutSharp.Tests
                 status = "all"
             });
             Assert.IsTrue(res.page.size > 0);
-            Assert.IsTrue(res._embedded.conversations.Length > 0);
-            Assert.IsTrue(res._embedded.conversations[0].state.Length > 0);
-            Assert.IsTrue(res._embedded.conversations[0]._embedded.threads.Length > 0);
-            Assert.IsTrue(res._embedded.conversations[0]._embedded.threads[0].source.type.Length > 0);
+            Assert.IsTrue(res.entities.Length > 0);
+            Assert.IsTrue(res.entities[0].state.Length > 0);
+            Assert.IsTrue(res.entities[0]._embedded.threads.Length > 0);
+            Assert.IsTrue(res.entities[0]._embedded.threads[0].source.type.Length > 0);
         }
 
         [TestMethod]
         public async Task UpdateConversationTagsAsync_Works()
         {
-            var conv = (await _service.ListAsync())._embedded.conversations[0];
+            var conv = (await _service.ListAsync()).entities[0];
 
             await _service.UpdateTagsAsync(conv.id, new UpdateTagsRequest
             {
@@ -74,8 +75,8 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task UpdateCustomFieldsAsync_Works()
         {
-            var conv = (await _service.ListAsync())._embedded.conversations[0];
-            var mailbox = (await _mailboxService.ListAsync())._embedded.mailboxes[0];
+            var conv = (await _service.ListAsync()).entities[0];
+            var mailbox = (await _mailboxService.ListAsync()).entities[0];
             var customFieldsResponse = await _mailboxService.ListCustomFieldsAsync(mailbox.id);
 
             if (customFieldsResponse._embedded.fields.Length == 0)

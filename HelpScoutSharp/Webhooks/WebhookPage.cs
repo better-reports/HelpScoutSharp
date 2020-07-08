@@ -4,15 +4,17 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class ListTeamsResponse
+    public class WebhookPage : IPage<Webhook>
     {
         public class Embedded
         {
-            public Team[] teams { get; set; }
+            public Webhook[] webhooks { get; set; }
         }
 
         public Embedded _embedded { get; set; }
 
         public Page page { get; set; }
+
+        public Webhook[] entities => _embedded.webhooks;
     }
 }

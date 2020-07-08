@@ -4,15 +4,17 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class ListConversationsResponse
+    public class UserPage : IPage<User>
     {
         public class Embedded
         {
-            public Conversation[] conversations { get; set; }
+            public User[] users { get; set; }
         }
 
         public Embedded _embedded { get; set; }
 
         public Page page { get; set; }
+
+        public User[] entities => _embedded.users;
     }
 }

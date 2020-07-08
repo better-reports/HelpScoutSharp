@@ -14,6 +14,7 @@ namespace HelpScoutSharp.Tests
         [TestInitialize]
         public async Task Initialize()
         {
+            HelpScoutHttpClient.RateLimitBreachBehavior = RateLimitBreachBehavior.WaitAndRetryOnce;
             var authSvc = new AuthenticationService();
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
             _service = new UserService(token.access_token);
@@ -37,7 +38,7 @@ namespace HelpScoutSharp.Tests
         public async Task GetUserAsync_Works()
         {
             var res = await _service.ListAsync();
-            var user = await _service.GetAsync(res._embedded.users[0].id);
+            var user = await _service.GetAsync(res.entities[0].id);
             Assert.IsTrue(user.id > 0);
         }
     }

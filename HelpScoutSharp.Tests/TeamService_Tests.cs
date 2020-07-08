@@ -14,6 +14,7 @@ namespace HelpScoutSharp.Tests
         [TestInitialize]
         public async Task Initialize()
         {
+            HelpScoutHttpClient.RateLimitBreachBehavior = RateLimitBreachBehavior.WaitAndRetryOnce;
             var authSvc = new AuthenticationService();
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
             _service = new TeamService(token.access_token);
@@ -24,13 +25,13 @@ namespace HelpScoutSharp.Tests
         {
             var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
-            Assert.IsNotNull(res._embedded.teams[0].name);
+            Assert.IsNotNull(res.entities[0].name);
         }
 
         [TestMethod]
         public async Task LisTeamMembersAsync_Works()
         {
-            var team = (await _service.ListAsync())._embedded.teams[0];
+            var team = (await _service.ListAsync()).entities[0];
             var res = await _service.LisMembersAsync(team.id);
             Assert.IsTrue(res.page.size > 0);
             Assert.IsNotNull(res._embedded.users[0].firstName);

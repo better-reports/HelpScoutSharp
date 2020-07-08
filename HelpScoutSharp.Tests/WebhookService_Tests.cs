@@ -28,6 +28,7 @@ satisfaction.ratings".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyE
         [TestInitialize]
         public async Task Initialize()
         {
+            HelpScoutHttpClient.RateLimitBreachBehavior = RateLimitBreachBehavior.WaitAndRetryOnce;
             var authSvc = new AuthenticationService();
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
             _service = new WebhookService(token.access_token);

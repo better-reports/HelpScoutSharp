@@ -4,15 +4,17 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class ListMailboxesResponse
+    public class CustomerPage : IPage<Customer>
     {
         public class Embedded
         {
-            public Mailbox[] mailboxes { get; set; }
+            public Customer[] customers { get; set; }
         }
 
         public Embedded _embedded { get; set; }
 
         public Page page { get; set; }
+
+        public Customer[] entities => _embedded.customers;
     }
 }

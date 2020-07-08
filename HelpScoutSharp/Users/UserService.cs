@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HelpScoutSharp
 {
-    public class UserService : ServiceBase
+    public class UserService : ServiceBase, IListableService<User, ListUsersOptions>
     {
         public UserService(string accessToken)
             : base(accessToken, "users")
@@ -23,9 +23,9 @@ namespace HelpScoutSharp
             return await _client.GetAsync<User>(new Url(_serviceUri).AppendPathSegment(userId).ToUri());
         }
 
-        public async Task<ListUsersResponse> ListAsync(ListUsersOptions options = null)
+        public async Task<IPage<User>> ListAsync(ListUsersOptions options = null)
         {
-            return await _client.GetAsync<ListUsersResponse>(_serviceUri, options);
+            return await _client.GetAsync<UserPage>(_serviceUri, options);
         }
     }
 }

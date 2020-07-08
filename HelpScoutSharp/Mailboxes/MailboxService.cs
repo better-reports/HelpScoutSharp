@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HelpScoutSharp
 {
-    public class MailboxService : ServiceBase
+    public class MailboxService : ServiceBase, IListableService<Mailbox, ListMailboxesOptions>
     {
         public MailboxService(string accessToken)
             : base(accessToken, "mailboxes")
@@ -15,9 +15,9 @@ namespace HelpScoutSharp
         }
 
 
-        public async Task<ListMailboxesResponse> ListAsync()
+        public async Task<IPage<Mailbox>> ListAsync(ListMailboxesOptions options = null)
         {
-            return await _client.GetAsync<ListMailboxesResponse>(_serviceUri);
+            return await _client.GetAsync<MailboxPage>(_serviceUri, options);
         }
 
         public async Task<ListMailboxCustomFieldsResponse> ListCustomFieldsAsync(long mailboxId)

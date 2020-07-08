@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HelpScoutSharp
 {
-    public class ConversationService : ServiceBase
+    public class ConversationService : ServiceBase, IListableService<Conversation, ListConversationsOptions>
     {
         public ConversationService(string accessToken) 
             : base(accessToken, "conversations")
@@ -18,9 +18,9 @@ namespace HelpScoutSharp
             return await _client.GetAsync<Conversation>(new Url(_serviceUri).AppendPathSegment(conversationId).ToUri(), options);
         }
 
-        public async Task<ListConversationsResponse> ListAsync(ListConversationsOptions options = null)
+        public async Task<IPage<Conversation>> ListAsync(ListConversationsOptions options = null)
         {
-            return await _client.GetAsync<ListConversationsResponse>(_serviceUri, options);
+            return await _client.GetAsync<ConversationPage>(_serviceUri, options);
         }
 
         public async Task UpdateTagsAsync(long conversationId, UpdateTagsRequest request)
