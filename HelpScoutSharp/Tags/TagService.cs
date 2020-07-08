@@ -13,7 +13,7 @@ namespace HelpScoutSharp
         {
         }
 
-        public async Task<ListTagsResponse> LisTagsAsync(ListTagsOptions options = null)
+        public async Task<ListTagsResponse> ListAsync(ListTagsOptions options = null)
         {
             return await _client.GetAsync<ListTagsResponse>(_serviceUri, options);
         }

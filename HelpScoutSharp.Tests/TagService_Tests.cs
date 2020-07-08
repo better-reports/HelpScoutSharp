@@ -22,7 +22,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task LisTagsAsync_Works()
         {
-            var res = await _service.LisTagsAsync();
+            var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
         }
     }

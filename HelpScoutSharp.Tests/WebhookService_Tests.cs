@@ -36,14 +36,14 @@ satisfaction.ratings".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyE
         [TestMethod]
         public async Task ListWebhooksAsync_Works()
         {
-            var res = await _service.ListWebhooksAsync();
+            var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
         }
 
         [TestMethod]
         public async Task MutateWebhook_Works()
         {
-            var webhookId = await _service.CreateWebhookAsync(new CreateWebhookRequest
+            var webhookId = await _service.CreateAsync(new CreateWebhookRequest
             {
                 url = "https://www.example.com",
                 secret = "mySecret",
@@ -52,7 +52,7 @@ satisfaction.ratings".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyE
             });
             Assert.IsTrue(webhookId > 0);
 
-            await _service.UpdateWebhookAsync(webhookId, new UpdateWebhookRequest
+            await _service.UpdateAsync(webhookId, new UpdateWebhookRequest
             {
                 url = "https://www.google.com",
                 secret = "mySecretNew",
@@ -60,7 +60,7 @@ satisfaction.ratings".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyE
                 events = ALL_EVENTS
             });
 
-            await _service.DeleteWebhookAsync(webhookId);
+            await _service.DeleteAsync(webhookId);
         }
 
         [TestMethod]

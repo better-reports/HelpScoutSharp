@@ -16,25 +16,25 @@ namespace HelpScoutSharp
         }
 
 
-        public async Task<ListWebhooksResponse> ListWebhooksAsync()
+        public async Task<ListWebhooksResponse> ListAsync()
         {
             return await _client.GetAsync<ListWebhooksResponse>(_serviceUri);
         }
 
-        public async Task<long> CreateWebhookAsync(CreateWebhookRequest request)
+        public async Task<long> CreateAsync(CreateWebhookRequest request)
         {
             var response = await _client.PostAsync(_serviceUri, request);
             return long.Parse(response.Headers.GetValues("Resource-ID").First());
         }
 
-        public async Task UpdateWebhookAsync(long webhookId, UpdateWebhookRequest request)
+        public async Task UpdateAsync(long webhookId, UpdateWebhookRequest request)
         {
             await _client.PutAsync(new Url(_serviceUri)
                                         .AppendPathSegment($"{webhookId}")
                                         .ToUri(), request);
         }
 
-        public async Task DeleteWebhookAsync(long webhookId)
+        public async Task DeleteAsync(long webhookId)
         {
             await _client.DeleteAsync(new Url(_serviceUri)
                                                 .AppendPathSegment($"{webhookId}")

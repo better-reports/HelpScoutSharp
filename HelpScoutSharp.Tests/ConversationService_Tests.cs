@@ -25,8 +25,8 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task GetConversationsAsync_Works()
         {
-            var res = await _service.ListConversationsAsync();
-            var conv = await _service.GetConversationAsync(res._embedded.conversations[0].id, new GetConversationsOptions { embed = "threads" });
+            var res = await _service.ListAsync();
+            var conv = await _service.GetAsync(res._embedded.conversations[0].id, new GetConversationsOptions { embed = "threads" });
             Assert.IsTrue(conv.id > 0);
             Assert.IsTrue(conv._embedded.threads[0].id > 0);
         }
@@ -34,7 +34,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListConversationsAsync_Works()
         {
-            var res = await _service.ListConversationsAsync();
+            var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
             Assert.IsTrue(res._embedded.conversations.Length > 0);
             Assert.IsTrue(res._embedded.conversations[0].state.Length > 0);
@@ -43,7 +43,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListConversationsAsync_EmbedThreads()
         {
-            var res = await _service.ListConversationsAsync(new ListConversationsOptions
+            var res = await _service.ListAsync(new ListConversationsOptions
             {
                 embed = "threads",
                 status = "all"
@@ -58,14 +58,14 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task UpdateConversationTagsAsync_Works()
         {
-            var conv = (await _service.ListConversationsAsync())._embedded.conversations[0];
+            var conv = (await _service.ListAsync())._embedded.conversations[0];
 
-            await _service.UpdateConversationTagsAsync(conv.id, new UpdateTagsRequest
+            await _service.UpdateTagsAsync(conv.id, new UpdateTagsRequest
             {
                 tags = conv.tags.Select(t => t.tag).Concat(new[] { "unit-test" }).ToArray()
             });
 
-            await _service.UpdateConversationTagsAsync(conv.id, new UpdateTagsRequest
+            await _service.UpdateTagsAsync(conv.id, new UpdateTagsRequest
             {
                 tags = conv.tags.Select(t => t.tag).Where(t => t != "unit-test").ToArray()
             });
@@ -74,9 +74,9 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task UpdateCustomFieldsAsync_Works()
         {
-            var conv = (await _service.ListConversationsAsync())._embedded.conversations[0];
-            var mailbox = (await _mailboxService.ListMailboxesAsync())._embedded.mailboxes[0];
-            var customFieldsResponse = await _mailboxService.ListMailboxCustomFieldsAsync(mailbox.id);
+            var conv = (await _service.ListAsync())._embedded.conversations[0];
+            var mailbox = (await _mailboxService.ListAsync())._embedded.mailboxes[0];
+            var customFieldsResponse = await _mailboxService.ListCustomFieldsAsync(mailbox.id);
 
             if (customFieldsResponse._embedded.fields.Length == 0)
             {

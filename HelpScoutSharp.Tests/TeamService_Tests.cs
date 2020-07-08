@@ -22,7 +22,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task LisTeamsAsync_Works()
         {
-            var res = await _service.LisTeamsAsync();
+            var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
             Assert.IsNotNull(res._embedded.teams[0].name);
         }
@@ -30,8 +30,8 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task LisTeamMembersAsync_Works()
         {
-            var team = (await _service.LisTeamsAsync())._embedded.teams[0];
-            var res = await _service.LisTeamMembersAsync(team.id);
+            var team = (await _service.ListAsync())._embedded.teams[0];
+            var res = await _service.LisMembersAsync(team.id);
             Assert.IsTrue(res.page.size > 0);
             Assert.IsNotNull(res._embedded.users[0].firstName);
         }

@@ -13,12 +13,12 @@ namespace HelpScoutSharp
         {
         }
 
-        public async Task<ListTeamsResponse> LisTeamsAsync(ListTeamsOptions options = null)
+        public async Task<ListTeamsResponse> ListAsync(ListTeamsOptions options = null)
         {
             return await _client.GetAsync<ListTeamsResponse>(_serviceUri, options);
         }
 
-        public async Task<ListTeamMembersResponse> LisTeamMembersAsync(long teamId, ListTeamMembersOptions options = null)
+        public async Task<ListTeamMembersResponse> LisMembersAsync(long teamId, ListTeamMembersOptions options = null)
         {
             return await _client.GetAsync<ListTeamMembersResponse>(new Url(_serviceUri)
                                                                         .AppendPathSegment($"{teamId}/members")

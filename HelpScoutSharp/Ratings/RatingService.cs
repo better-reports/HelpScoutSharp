@@ -13,7 +13,7 @@ namespace HelpScoutSharp
         {
         }
 
-        public async Task<Rating> GetRatingAsync(long ratingId)
+        public async Task<Rating> GetAsync(long ratingId)
         {
             return await _client.GetAsync<Rating>(new Url(_serviceUri).AppendPathSegment(ratingId).ToUri());
         }

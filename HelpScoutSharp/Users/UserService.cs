@@ -18,12 +18,12 @@ namespace HelpScoutSharp
             return await _client.GetAsync<User>(new Url(_serviceUri).AppendPathSegment("me").ToUri());
         }
 
-        public async Task<User> GetUserAsync(long userId)
+        public async Task<User> GetAsync(long userId)
         {
             return await _client.GetAsync<User>(new Url(_serviceUri).AppendPathSegment(userId).ToUri());
         }
 
-        public async Task<ListUsersResponse> ListUsersAsync(ListUsersOptions options = null)
+        public async Task<ListUsersResponse> ListAsync(ListUsersOptions options = null)
         {
             return await _client.GetAsync<ListUsersResponse>(_serviceUri, options);
         }

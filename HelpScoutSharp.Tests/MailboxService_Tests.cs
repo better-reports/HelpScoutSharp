@@ -22,7 +22,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListMailboxesAsync_Works()
         {
-            var res = await _service.ListMailboxesAsync();
+            var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
             Assert.IsNotNull(res._embedded.mailboxes[0].email);
         }
@@ -30,8 +30,8 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListMailboxCustomFieldsAsync_Works()
         {
-            var maiboxId = (await _service.ListMailboxesAsync())._embedded.mailboxes[0].id;
-            var res = await _service.ListMailboxCustomFieldsAsync(maiboxId);
+            var maiboxId = (await _service.ListAsync())._embedded.mailboxes[0].id;
+            var res = await _service.ListCustomFieldsAsync(maiboxId);
             Assert.IsTrue(res.page.size > 0);
             Assert.IsNotNull(res._embedded.fields);
         }
@@ -39,8 +39,8 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListMailboxFoldersAsync_Works()
         {
-            var maiboxId = (await _service.ListMailboxesAsync())._embedded.mailboxes[0].id;
-            var res = await _service.ListMailboxFoldersAsync(maiboxId);
+            var maiboxId = (await _service.ListAsync())._embedded.mailboxes[0].id;
+            var res = await _service.ListFoldersAsync(maiboxId);
             Assert.IsTrue(res.page.size > 0);
             Assert.IsNotNull(res._embedded.folders);
         }

@@ -22,7 +22,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListCustomersAsync_Works()
         {
-            var res = await _service.ListUsersAsync();
+            var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
         }
 
@@ -36,8 +36,8 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task GetUserAsync_Works()
         {
-            var res = await _service.ListUsersAsync();
-            var user = await _service.GetUserAsync(res._embedded.users[0].id);
+            var res = await _service.ListAsync();
+            var user = await _service.GetAsync(res._embedded.users[0].id);
             Assert.IsTrue(user.id > 0);
         }
     }

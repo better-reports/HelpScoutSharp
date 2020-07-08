@@ -25,7 +25,7 @@ namespace HelpScoutSharp.Tests
             try
             {
                 //hard coded rating Id would only be found on integrating test HelpScout accout
-                var rating = await _service.GetRatingAsync(20177871);
+                var rating = await _service.GetAsync(20177871);
                 Assert.IsTrue(rating.id > 0);
             }
             catch (HelpScoutException ex) when (ex.Response.StatusCode == System.Net.HttpStatusCode.NotFound)
