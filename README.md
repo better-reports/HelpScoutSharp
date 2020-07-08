@@ -74,7 +74,9 @@ var res = await customerService.ListCustomersAsync();
 
 #### Custom `HttpClient`
 
-You may set a custom `HttpClient`: `HelpScoutHttpClient.HttpClient = myHttpClient;`
+You may set a custom `HttpClient`: 
+
+`HelpScoutHttpClient.HttpClient = myHttpClient;`
 
 #### Rate limit breach behaviour
 
