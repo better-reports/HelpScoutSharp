@@ -131,7 +131,7 @@ namespace HelpScoutSharp
 
         public DateTime? closedAt { get; set; }
 
-        public DateTime userUpdatedAt { get; set; }
+        public DateTime? userUpdatedAt { get; set; }
 
         public CustomerWaitingSince customerWaitingSince { get; set; }
 
