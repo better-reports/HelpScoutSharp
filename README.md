@@ -70,6 +70,21 @@ var customerService = new CustomerService(token.access_token);
 var res = await customerService.ListCustomersAsync();
 ```
 
+### Global settings
+
+#### Custom `HttpClient`
+
+You may set a custom `HttpClient`: `HelpScoutHttpClient.HttpClient = myHttpClient;`
+
+#### Rate limit breach behaviour
+
+By default, a `HelpScoutException` is thrown when you breach your rate limit.
+See https://developer.helpscout.com/mailbox-api/overview/rate-limiting/
+
+Alternatively, you can opt-in for HelpScoutSharp to automatically retry after waiting for the appropriate amount of time:
+
+`HelpScoutHttpClient.RateLimitBreachBehavior = RateLimitBreachBehavior.WaitAndRetryOnce;`
+
 ### Verifying webhooks
 
 When receiving webhooks, you can check that the request is authentic with the `WebhookService`.
