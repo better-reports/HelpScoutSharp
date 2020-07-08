@@ -8,13 +8,13 @@ namespace HelpScoutSharp
     {
         public int? page { get; set; }
 
-        public long mailbox { get; set; }
+        public long? mailbox { get; set; }
 
         public string firstName { get; set; }
 
         public string lastName { get; set; }
 
-        public DateTime modifiedSince { get; set; }
+        public DateTime? modifiedSince { get; set; }
 
         public string sortField { get; set; }
 

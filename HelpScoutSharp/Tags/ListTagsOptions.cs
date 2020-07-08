@@ -6,6 +6,6 @@ namespace HelpScoutSharp
 {
     public class ListTagsOptions
     {
-        public int page { get; set; }
+        public int? page { get; set; }
     }
 }

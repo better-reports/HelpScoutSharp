@@ -6,6 +6,6 @@ namespace HelpScoutSharp
 {
     public class ListTeamMembersOptions
     {
-        public int page { get; set; }
+        public int? page { get; set; }
     }
 }

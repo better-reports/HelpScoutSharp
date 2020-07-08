@@ -6,8 +6,10 @@ namespace HelpScoutSharp
 {
     public class ListUsersOptions
     {
+        public int? page { get; set; }
+
         public string email { get; set; }
 
-        public long mailbox { get; set; }
+        public long? mailbox { get; set; }
     }
 }
