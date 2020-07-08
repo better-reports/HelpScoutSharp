@@ -23,6 +23,9 @@ namespace HelpScoutSharp
             return url;
         }
 
+        /// <summary>
+        /// Multiple tokens can be generated and valid simultaneously
+        /// </summary>
         public async Task<TokenResponse> GetOAuthTokenAsync(string applicationId, string applicationSecret, string code)
         {
             return await _client.PostAsync<TokenResponse>(_serviceUri, new TokenRequest
@@ -34,6 +37,10 @@ namespace HelpScoutSharp
             });
         }
 
+        /// <summary>
+        /// When refreshed, the previous access token is invalidated immediately
+        /// </summary>
+        /// <returns></returns>
         public async Task<TokenResponse> RefreshOAuthTokenAsync(string applicationId, string applicationSecret, string refreshToken)
         {
             return await _client.PostAsync<TokenResponse>(_serviceUri, new TokenRequest
@@ -45,6 +52,9 @@ namespace HelpScoutSharp
             });
         }
 
+        /// <summary>
+        /// Multiple tokens can be generated and valid simultaneously
+        /// </summary>
         public async Task<TokenResponse> GetApplicationTokenAsync(string applicationId, string applicationSecret)
         {
             return await _client.PostAsync<TokenResponse>(_serviceUri, new TokenRequest
