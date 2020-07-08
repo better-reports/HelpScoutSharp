@@ -31,6 +31,8 @@ namespace HelpScoutSharp
             public string last { get; set; }
 
             public string email { get; set; }
+
+            public string type { get; set; }
         }
 
         public class CreatedBy
