@@ -26,7 +26,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task GetConversationsAsync_Works()
         {
-            var res = await _service.ListAsync();
+            var res = await _service.ListAsync(new ListConversationsOptions { status = "all" });
             var conv = await _service.GetAsync(res.entities[0].id, new GetConversationsOptions { embed = "threads" });
             Assert.IsTrue(conv.id > 0);
             Assert.IsTrue(conv._embedded.threads[0].id > 0);
@@ -35,7 +35,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListConversationsAsync_Works()
         {
-            var res = await _service.ListAsync();
+            var res = await _service.ListAsync(new ListConversationsOptions { status = "all" });
             Assert.IsTrue(res.page.size > 0);
             Assert.IsTrue(res.entities.Length > 0);
             Assert.IsTrue(res.entities[0].state.Length > 0);
@@ -59,7 +59,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task UpdateConversationTagsAsync_Works()
         {
-            var conv = (await _service.ListAsync()).entities[0];
+            var conv = (await _service.ListAsync(new ListConversationsOptions { status = "all" })).entities[0];
 
             await _service.UpdateTagsAsync(conv.id, new UpdateTagsRequest
             {
@@ -75,7 +75,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task UpdateCustomFieldsAsync_Works()
         {
-            var conv = (await _service.ListAsync()).entities[0];
+            var conv = (await _service.ListAsync(new ListConversationsOptions { status = "all" })).entities[0];
             var mailbox = (await _mailboxService.ListAsync()).entities[0];
             var customFieldsResponse = await _mailboxService.ListCustomFieldsAsync(mailbox.id);
 
