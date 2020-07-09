@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class MailboxCustomField : IHasId
+    public class CustomField : IHasId
     {
         public class DropDownOption : IHasId
         {

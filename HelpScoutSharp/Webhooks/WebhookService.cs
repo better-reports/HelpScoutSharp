@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HelpScoutSharp
 {
-    public class WebhookService : ServiceBase, IListableService<Webhook, ListWebhooksOptions>
+    public class WebhookService : ServiceBase, IListableService<Webhook, ListOptions>
     {
         public WebhookService(string accessToken)
             : base(accessToken, "webhooks")
@@ -16,9 +16,9 @@ namespace HelpScoutSharp
         }
 
 
-        public async Task<IPage<Webhook>> ListAsync(ListWebhooksOptions options = null)
+        public async Task<IPage<Webhook>> ListAsync(ListOptions options = null)
         {
-            return await _client.GetAsync<WebhookPage>(_serviceUri);
+            return await _client.GetAsync<WebhookPage>(_serviceUri, options);
         }
 
         public async Task<long> CreateAsync(CreateWebhookRequest request)

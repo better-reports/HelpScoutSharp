@@ -12,6 +12,7 @@ namespace HelpScoutSharp.Tests
     {
         private ConversationService _service;
         private MailboxService _mailboxService;
+        private CustomFieldService _customFieldsService;
 
         [TestInitialize]
         public async Task Initialize()
@@ -21,6 +22,7 @@ namespace HelpScoutSharp.Tests
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
             _service = new ConversationService(token.access_token);
             _mailboxService = new MailboxService(token.access_token);
+            _customFieldsService = new CustomFieldService(token.access_token);
         }
 
         [TestMethod]
@@ -77,15 +79,15 @@ namespace HelpScoutSharp.Tests
         {
             var conv = (await _service.ListAsync(new ListConversationsOptions { status = "all" })).entities[0];
             var mailbox = (await _mailboxService.ListAsync()).entities[0];
-            var customFieldsResponse = await _mailboxService.ListCustomFieldsAsync(mailbox.id);
+            var customFieldsResponse = await _customFieldsService.ListAsync(mailbox.id);
 
-            if (customFieldsResponse._embedded.fields.Length == 0)
+            if (customFieldsResponse.entities.Length == 0)
             {
                 Assert.Inconclusive();
                 return;
             }
 
-            var customField = customFieldsResponse._embedded.fields[0];
+            var customField = customFieldsResponse.entities[0];
             await _service.UpdateCustomFieldsAsync(conv.id, new UpdateCustomFieldsRequest
             {
                 fields = new UpdateCustomFieldsRequest.CustomFieldValue[0]

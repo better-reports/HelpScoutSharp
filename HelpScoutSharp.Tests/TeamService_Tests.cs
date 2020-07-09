@@ -27,14 +27,5 @@ namespace HelpScoutSharp.Tests
             Assert.IsTrue(res.page.size > 0);
             Assert.IsNotNull(res.entities[0].name);
         }
-
-        [TestMethod]
-        public async Task LisTeamMembersAsync_Works()
-        {
-            var team = (await _service.ListAsync()).entities[0];
-            var res = await _service.LisMembersAsync(team.id);
-            Assert.IsTrue(res.page.size > 0);
-            Assert.IsNotNull(res._embedded.users[0].firstName);
-        }
     }
 }

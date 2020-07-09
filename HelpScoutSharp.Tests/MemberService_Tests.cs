@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace HelpScoutSharp.Tests
 {
     [TestClass]
-    public class MailboxService_Tests
+    public class MemberService_Tests
     {
-        private MailboxService _service;
+        private TeamService _teamService;
+        private MemberService _service;
 
         [TestInitialize]
         public async Task Initialize()
@@ -17,15 +18,17 @@ namespace HelpScoutSharp.Tests
             HelpScoutHttpClient.RateLimitBreachBehavior = RateLimitBreachBehavior.WaitAndRetryOnce;
             var authSvc = new AuthenticationService();
             var token = await authSvc.GetApplicationTokenAsync(TestHelper.ApplicationId, TestHelper.ApplicationSecret);
-            _service = new MailboxService(token.access_token);
+            _teamService = new TeamService(token.access_token);
+            _service = new MemberService(token.access_token);
         }
 
         [TestMethod]
-        public async Task ListMailboxesAsync_Works()
+        public async Task LisTeamMembersAsync_Works()
         {
-            var res = await _service.ListAsync();
+            var team = (await _teamService.ListAsync()).entities[0];
+            var res = await _service.ListAsync(team.id);
             Assert.IsTrue(res.page.size > 0);
-            Assert.IsNotNull(res.entities[0].email);
+            Assert.IsNotNull(res.entities[0].firstName);
         }
     }
 }

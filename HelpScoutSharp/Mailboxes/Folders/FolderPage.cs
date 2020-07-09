@@ -4,15 +4,17 @@ using System.Text;
 
 namespace HelpScoutSharp
 {
-    public class ListMailboxCustomFieldsResponse
+    public class FolderPage : IPage<Folder>
     {
         public class Embedded
         {
-            public MailboxCustomField[] fields { get; set; }
+            public Folder[] folders { get; set; }
         }
 
         public Embedded _embedded { get; set; }
 
         public Page page { get; set; }
+
+        public Folder[] entities => _embedded.folders;
     }
 }
