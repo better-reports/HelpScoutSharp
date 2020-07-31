@@ -16,9 +16,14 @@ namespace HelpScoutSharp
 
         public async Task<IPage<CustomField>> ListAsync(long mailboxId, ListOptions options = null)
         {
-            return await _client.GetAsync<CustomFieldPage>(new Url(_serviceUri)
+            var res = await _client.GetAsync<CustomFieldPage>(new Url(_serviceUri)
                                                                 .AppendPathSegment($"{mailboxId}/fields")
                                                                 .ToUri(), options);
+
+            foreach (var i in res.entities)
+                i.mailboxId = mailboxId;
+
+            return res;
         }
     }
 }

@@ -8,6 +8,8 @@ namespace HelpScoutSharp
     {
         public long id { get; set; }
 
+        public long mailboxId { get; set; }
+
         public string type { get; set; }
 
         public string name { get; set; }

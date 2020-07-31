@@ -17,6 +17,8 @@ namespace HelpScoutSharp
 
         public long id { get; set; }
 
+        public long mailboxId { get; set; }
+
         public string name { get; set; }
 
         public bool required { get; set; }

@@ -16,9 +16,13 @@ namespace HelpScoutSharp
 
         public async Task<IPage<Folder>> ListAsync(long mailboxId, ListOptions options = null)
         {
-            return await _client.GetAsync<FolderPage>(new Url(_serviceUri)
+            var res = await _client.GetAsync<FolderPage>(new Url(_serviceUri)
                                                             .AppendPathSegment($"{mailboxId}/folders")
                                                             .ToUri(), options);
+            foreach (var i in res.entities)
+                i.mailboxId = mailboxId;
+
+            return res;
         }
     }
 }
