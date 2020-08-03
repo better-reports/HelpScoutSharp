@@ -40,14 +40,5 @@ namespace HelpScoutSharp
                                                 .AppendPathSegment($"{webhookId}")
                                                 .ToUri());
         }
-
-        public static bool IsAuthenticWebhook(string appSecretKey, string signature, string requestBody)
-        {
-            using (var hmac = new HMACSHA1(Encoding.UTF8.GetBytes(appSecretKey)))
-            {
-                string hash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(requestBody)));
-                return hash == signature;
-            }
-        }
     }
 }
