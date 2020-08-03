@@ -6,6 +6,6 @@ namespace HelpScoutSharp
 {
     public interface IHasId
     {
-        long id { get; }
+        long id { get; set; }
     }
 }
