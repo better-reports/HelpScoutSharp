@@ -23,8 +23,8 @@ PRs are welcome!
 | Conversation / Threads       | List                              | Yes          |
 | Conversation                 | Create/Update/Delete              | No           |
 | Conversation                 | List/Get                          | Yes          |
-| Customers                    | Create/Get/Update/Overwrite       | No           |
-| Customers                    | List                              | Yes          |
+| Customers                    | Create/Update/Overwrite           | No           |
+| Customers                    | List/Get                          | Yes          |
 | Mailbox                      | Get                               | No           |
 | Mailbox                      | List/ListFolders/ListCustomFields | Yes          |
 | Ratings                      | Get                               | Yes          |

@@ -26,7 +26,7 @@ namespace HelpScoutSharp.Tests
         }
 
         [TestMethod]
-        public async Task GetConversationsAsync_Works()
+        public async Task GetConversationAsync_Works()
         {
             var res = await _service.ListAsync(new ListConversationsOptions { status = "all" });
             var conv = await _service.GetAsync(res.entities[0].id, new GetConversationsOptions { embed = "threads" });

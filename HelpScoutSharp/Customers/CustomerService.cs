@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flurl;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,10 @@ namespace HelpScoutSharp
         {
         }
 
+        public async Task<Customer> GetAsync(long customerId)
+        {
+            return await _client.GetAsync<Customer>(new Url(_serviceUri).AppendPathSegment(customerId).ToUri());
+        }
 
         public async Task<IPage<Customer>> ListAsync(ListCustomersOptions options = null)
         {

@@ -21,6 +21,14 @@ namespace HelpScoutSharp.Tests
         }
 
         [TestMethod]
+        public async Task GetCustomerAsync_Works()
+        {
+            var res = await _service.ListAsync();
+            var customer = await _service.GetAsync(res.entities[0].id);
+            Assert.IsTrue(customer.id > 0);
+        }
+
+        [TestMethod]
         public async Task ListCustomersAsync_Works()
         {
             var res = await _service.ListAsync();
