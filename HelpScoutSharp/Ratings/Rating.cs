@@ -44,7 +44,7 @@ namespace HelpScoutSharp
 
         public DateTime createdAt { get; set; }
 
-        public DateTime updatedAt { get; set; }
+        public DateTime modifiedAt { get; set; }
 
         public RatingUser user { get; set; }
 
