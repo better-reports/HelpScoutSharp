@@ -21,7 +21,7 @@ namespace HelpScoutSharp.Tests
         }
 
         [TestMethod]
-        public async Task ListCustomersAsync_Works()
+        public async Task ListUsersAsync_Works()
         {
             var res = await _service.ListAsync();
             Assert.IsTrue(res.page.size > 0);
