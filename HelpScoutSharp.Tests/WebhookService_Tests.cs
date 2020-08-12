@@ -49,7 +49,8 @@ satisfaction.ratings".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyE
                 url = "https://www.example.com",
                 secret = "mySecret",
                 notification = true,
-                events = ALL_EVENTS
+                events = ALL_EVENTS,
+                payloadVersion = "V2"
             });
             Assert.IsTrue(webhookId > 0);
 
@@ -58,7 +59,8 @@ satisfaction.ratings".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyE
                 url = "https://www.google.com",
                 secret = "mySecretNew",
                 notification = false,
-                events = ALL_EVENTS
+                events = ALL_EVENTS,
+                payloadVersion = "V2"
             });
 
             await _service.DeleteAsync(webhookId);

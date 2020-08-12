@@ -13,5 +13,7 @@ namespace HelpScoutSharp
         public bool notification { get; set; }
 
         public string secret { get; set; }
+
+        public string payloadVersion { get; set; }
     }
 }
