@@ -55,6 +55,26 @@ namespace HelpScoutSharp
                 public string[] lines { get; set; }
             }
 
+            public class CustomerProperty
+            {
+                public class CustomerPropertySource
+                {
+                    public string name { get; set; }
+                }
+
+                public string name { get; set; }
+
+                public string slug { get; set; }
+
+                public CustomerPropertySource source { get; set; }
+
+                public string text { get; set; }
+
+                public string type { get; set; }
+
+                public string value { get; set; }
+            }
+
             public CustomerEmail[] emails { get; set; }
 
             public CustomerPhone[] phones { get; set; }
@@ -66,6 +86,8 @@ namespace HelpScoutSharp
             public CustomerWebsite[] websites { get; set; }
 
             public CustomerAddress address { get; set; }
+
+            public CustomerProperty[] properties { get; set; }
         }
 
         public long id { get; set; }
