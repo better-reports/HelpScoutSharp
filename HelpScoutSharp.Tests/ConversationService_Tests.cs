@@ -37,7 +37,7 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListConversationsAsync_Works()
         {
-            var res = await _service.ListAsync(new ListConversationsOptions { status = "all" });
+            var res = await _service.ListAsync(new ListConversationsOptions { status = "all", modifiedSince = DateTime.UtcNow.AddYears(-2) });
             Assert.IsTrue(res.page.size > 0);
             Assert.IsTrue(res.entities.Length > 0);
             Assert.IsTrue(res.entities[0].state.Length > 0);

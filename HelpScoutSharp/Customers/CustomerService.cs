@@ -20,7 +20,12 @@ namespace HelpScoutSharp
 
         public async Task<IPage<Customer>> ListAsync(ListCustomersOptions options = null)
         {
-            return await _client.GetAsync<CustomerPage>(_serviceUri, options);
+            return await _client.GetAsync<CustomerPage>(_serviceUri, options, url =>
+            {
+                //Taking control of datetime serialization because API expects a different formant that Flurl's default
+                if (options?.modifiedSince != null)
+                    url.SetQueryParam(nameof(ListCustomersOptions.modifiedSince), options.modifiedSince.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            });
         }
     }
 }

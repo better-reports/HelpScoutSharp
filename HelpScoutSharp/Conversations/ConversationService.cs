@@ -8,7 +8,7 @@ namespace HelpScoutSharp
 {
     public class ConversationService : ServiceBase, IListableService<Conversation, ListConversationsOptions>
     {
-        public ConversationService(string accessToken) 
+        public ConversationService(string accessToken)
             : base(accessToken, "conversations")
         {
         }
@@ -20,7 +20,12 @@ namespace HelpScoutSharp
 
         public async Task<IPage<Conversation>> ListAsync(ListConversationsOptions options = null)
         {
-            return await _client.GetAsync<ConversationPage>(_serviceUri, options);
+            return await _client.GetAsync<ConversationPage>(_serviceUri, options, url =>
+            {
+                //Taking control of datetime serialization because API expects a different formant that Flurl's default
+                if (options?.modifiedSince != null)
+                    url.SetQueryParam(nameof(ListConversationsOptions.modifiedSince), options.modifiedSince.Value.ToString("yyyy-MM-ddTHH:mm:ssZ"));
+            });
         }
 
         public async Task UpdateTagsAsync(long conversationId, UpdateTagsRequest request)

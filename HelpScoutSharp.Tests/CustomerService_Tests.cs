@@ -31,7 +31,10 @@ namespace HelpScoutSharp.Tests
         [TestMethod]
         public async Task ListCustomersAsync_Works()
         {
-            var res = await _service.ListAsync();
+            var res = await _service.ListAsync(new ListCustomersOptions
+            {
+                modifiedSince = DateTime.UtcNow.AddDays(-600)
+            });
             Assert.IsTrue(res.page.size > 0);
         }
     }
