@@ -84,12 +84,15 @@ namespace HelpScoutSharp
                 if (_accessToken != null)
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
 
-
                 var response = await HttpClient.SendAsync(request);
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    var exception = new HelpScoutException(response, await response.Content.ReadAsStringAsync());
+                    var exception = new HelpScoutException(
+                        request, 
+                        await (request.Content?.ReadAsStringAsync() ?? Task.FromResult<string>(null)), 
+                        response, 
+                        await (response.Content?.ReadAsStringAsync() ?? Task.FromResult<string>(null)));
                     if (isFirstTry && RateLimitBreachBehavior == RateLimitBreachBehavior.WaitAndRetryOnce && exception.IsRateLimit)
                     {
                         isFirstTry = false;

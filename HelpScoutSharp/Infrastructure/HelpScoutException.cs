@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace HelpScoutSharp
@@ -31,10 +32,16 @@ namespace HelpScoutSharp
                                                     TimeSpan.FromSeconds(int.Parse(Response.Headers.GetValues("X-RateLimit-Retry-After").First())) :
                                                     (TimeSpan?)null;
 
-        public HelpScoutException(HttpResponseMessage response, string responseContent)
+        public HelpScoutException(HttpRequestMessage request, string requestContent, HttpResponseMessage response, string responseContent)
             : base($@"Help Scout API call failed with code: {response.StatusCode}
+Response
 Reason: {response.ReasonPhrase}
-Content: {responseContent}")
+Content: {responseContent}
+Headers: {response.Headers}
+
+Request: {request.Method} {request.RequestUri}
+Content: {requestContent}
+Headers: {request.Headers}")
         {
             this.Response = response;
             this.ResponseContent = responseContent;
