@@ -14,6 +14,7 @@ namespace HelpScoutSharp
                                                                                             { "convo", typeof(Conversation) },
                                                                                             { "customer", typeof(Customer) },
                                                                                             { "satisfaction", typeof(Rating) },
+                                                                                            { "tag", typeof(Tag) },
                                                                                         };
 
         public static readonly Dictionary<Type, string> ObjectTypeToObjectTypeName = ObjectTypeNameToObjectType.ToDictionary(kv => kv.Value, kv => kv.Key);
